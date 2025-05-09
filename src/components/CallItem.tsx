@@ -5,7 +5,7 @@
 // import { addEventsInData } from '../store/callsSlice';
 
 import { Calls } from '../types/types';
-import DropDown from './DropDown';
+import DropDown from './features/Dropdown/DropDown';
 
 function CallItem() {
 	// const dispatch = useAppDispatch();
@@ -26,8 +26,8 @@ function CallItem() {
 			<h1 className='text-3xl font-bold underline text-amber-400 mb-2'>Hello world!</h1>
 			{/* <AddEvent onClick={handleAddToList} /> */}
 			{/* <InputEvent /> */}
-			<DropDown<Calls['type']> options={['входящий', 'исходящий']} initial='входящий' />
-			<DropDown<Calls['priority']> options={['обычный', 'срочный']} initial='обычный' />
+			<DropDown<Calls['type']> options={['входящий', 'исходящий']} initial='входящий' text='Выберите тип звонка' />
+			{/* <DropDown<Calls['priority']> options={['обычный', 'срочный']} initial='обычный' text='Выберите важность' /> */}
 		</div>
 	);
 }
