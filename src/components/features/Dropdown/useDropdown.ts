@@ -5,6 +5,21 @@ export default function useDropdown<T extends string>(initial: T) {
 	const [select, setSelect] = useState<T>(initial);
 	const ref = useRef<HTMLDivElement>(null);
 
+	const getColor = (option: T) => {
+		switch (option) {
+			case 'исходящий':
+				return 'blue';
+			case 'входящий':
+				return 'green';
+			case 'обычный':
+				return 'gray';
+			case 'срочный':
+				return 'red';
+			default:
+				return 'blue';
+		}
+	};
+
 	const toggle = () => setIsOpen(prev => !prev);
 	const close = () => setIsOpen(false);
 
@@ -31,5 +46,6 @@ export default function useDropdown<T extends string>(initial: T) {
 		toggle,
 		// close, ------- если понадобиться закрывать dropdown где то в другом месте
 		handleSelect,
+		getColor,
 	};
 }

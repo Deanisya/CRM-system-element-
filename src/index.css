@@ -22,4 +22,7 @@ body {
 	--color-green-base-hover: #385459;
 	--color-green-hover: rgba(255, 255, 255, 0.08);
 	--color-green-bg: #bcf0de;
+	--color-gray-bg: #777a85;
+	--color-red-bg: #7b303a;
+	--color-white-tx: #f8e3e3;
 }
