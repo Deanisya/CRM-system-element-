@@ -9,7 +9,7 @@ type ButtonEventProps = {
 
 function ButtonEvent({ text, onClick, children, style }: ButtonEventProps) {
 	const className = {
-		addBtn: 'flex gap-6 justify-center items-center',
+		addBtn: 'flex gap-6 justify-center items-center border w-[100%] border-dashed border-white-border rounded-full pt-6 pb-6 ',
 		deleteBtn: 'bg-red py-2 px-2 rounded-full',
 	};
 

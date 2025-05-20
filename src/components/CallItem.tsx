@@ -1,12 +1,14 @@
 // import AddEvent from './ui/AddEvent';
-// import InputEvent from './InputName';
-// import { Calls } from '../types/types';
+import InputEvent from './InputName';
+import { Calls } from '../types/types';
 // import { useAppDispatch } from '../hooks/redux';
 // import { addEventsInData } from '../store/callsSlice';
 
-import ButtonEvent from './ui/ButtonEvent';
+import FlexContainer from './ui/FlexContainerProps';
 
-// import DropDown from './features/Dropdown/DropDown';
+// import ButtonEvent from './ui/ButtonEvent';
+
+import DropDown from './features/Dropdown/DropDown';
 
 function CallItem() {
 	// const dispatch = useAppDispatch();
@@ -23,12 +25,14 @@ function CallItem() {
 	// };
 
 	return (
-		<div>
-			{/* <AddEvent onClick={handleAddToList} /> */}
-			{/* <InputEvent /> */}
-			{/* <DropDown<Calls['type']> options={['входящий', 'исходящий']} initial='входящий' text='Выберите тип звонка' /> */}
-			{/* <DropDown<Calls['priority']> options={['обычный', 'срочный']} initial='обычный' text='Выберите важность' /> */}
-			<ButtonEvent style='deleteBtn'>
+		<div className='bg-dark-blue-bg rounded-full pb-4 pt-4 px-12'>
+			<FlexContainer>
+				<div className='bg-[#6A7B96] rounded-full py-3 px-6 w-[164px] h-[96px]'>data</div>
+				<InputEvent />
+				<DropDown<Calls['type']> options={['входящий', 'исходящий']} initial='входящий' text='Выберите тип звонка' />{' '}
+				<DropDown<Calls['priority']> options={['обычный', 'срочный']} initial='обычный' text='Выберите важность' />
+				{/* <AddEvent onClick={handleAddToList} /> */}
+				{/* <ButtonEvent style='deleteBtn'>
 				<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<path
 						fill-rule='evenodd'
@@ -37,17 +41,8 @@ function CallItem() {
 						fill='white'
 					/>
 				</svg>
-			</ButtonEvent>
-			<ButtonEvent text={'Добавить событие'} style={'addBtn'}>
-				<svg width='33' height='32' viewBox='0 0 33 32' fill='none' xmlns='http://www.w3.org/2000/svg'>
-					<path
-						fill-rule='evenodd'
-						clip-rule='evenodd'
-						d='M16.5 5.33333C17.2364 5.33333 17.8334 5.93028 17.8334 6.66666V14.6667H25.8334C26.5698 14.6667 27.1667 15.2636 27.1667 16C27.1667 16.7364 26.5698 17.3333 25.8334 17.3333H17.8334V25.3333C17.8334 26.0697 17.2364 26.6667 16.5 26.6667C15.7637 26.6667 15.1667 26.0697 15.1667 25.3333V17.3333H7.16671C6.43033 17.3333 5.83337 16.7364 5.83337 16C5.83337 15.2636 6.43033 14.6667 7.16671 14.6667H15.1667V6.66666C15.1667 5.93028 15.7637 5.33333 16.5 5.33333Z'
-						fill='white'
-					/>
-				</svg>
-			</ButtonEvent>
+			</ButtonEvent> */}
+			</FlexContainer>
 		</div>
 	);
 }

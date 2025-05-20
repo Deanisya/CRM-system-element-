@@ -16,12 +16,10 @@ function DropDownButton<T extends string>({ select, onClick, children, color }: 
 	};
 
 	return (
-		<div>
-			<button className={` flex gap-2 justify-center items-center border-0 rounded-full px-4 py-1 text-blue-dark-text hover:opacity-80 ${colorMap[color || 'blue']} `} onClick={onClick}>
-				<span className='capitalize font-semibold'>{select}</span>
-				{children}
-			</button>
-		</div>
+		<button className={` flex gap-2 justify-center items-center border-0 rounded-full px-4 py-1 text-blue-dark-text hover:opacity-80 ${colorMap[color || 'blue']}  `} onClick={onClick}>
+			<span className='capitalize font-semibold'>{select}</span>
+			{children}
+		</button>
 	);
 }
 

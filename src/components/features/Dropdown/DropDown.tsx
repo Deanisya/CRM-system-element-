@@ -11,7 +11,7 @@ function DropDown<T extends string>({ options, initial, text }: DropDownProps<T>
 	const { ref, isOpen, select, toggle, handleSelect, getColor } = useDropdown<T>(initial);
 
 	return (
-		<div className='relative w-fit mb-1.5' ref={ref}>
+		<div className='relative w-fit ' ref={ref}>
 			<DropDownButton select={select} onClick={toggle} color={getColor(select)}>
 				<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<path

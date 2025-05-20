@@ -3,7 +3,7 @@
 body {
 	background-color: #161a26;
 	color: #fff;
-	margin: 5vw;
+	margin: 20px;
 }
 
 @theme {
@@ -25,4 +25,6 @@ body {
 	--color-gray-bg: #777a85;
 	--color-red-bg: #7b303a;
 	--color-white-tx: #f8e3e3;
+	--color-white-border: #d2dae6;
+	--color-dark-blue-bg: #27344e;
 }
