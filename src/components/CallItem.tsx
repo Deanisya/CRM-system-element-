@@ -1,38 +1,33 @@
 // import AddEvent from './ui/AddEvent';
-import InputEvent from './InputName';
-import { Calls } from '../types/types';
 // import { useAppDispatch } from '../hooks/redux';
 // import { addEventsInData } from '../store/callsSlice';
-
-import FlexContainer from './ui/FlexContainerProps';
-
 // import ButtonEvent from './ui/ButtonEvent';
 
+import InputEvent from './InputName';
+import { Calls } from '../types/types';
+import GridContainer from './ui/GridContainer';
 import DropDown from './features/Dropdown/DropDown';
 
-function CallItem() {
-	// const dispatch = useAppDispatch();
-	// const newCall: Calls = {
-	// 	date: '2025-05-04',
-	// 	time: '10:00',
-	// 	responsible: 'Фамилия Имя участника',
-	// 	type: 'исходящий',
-	// 	priority: 'обычный',
-	// };
-
-	// const handleAddToList = () => {
-	// 	dispatch(addEventsInData(newCall));
-	// };
-
+interface CallItemProps {
+	call: Calls;
+}
+function CallItem({ call: { date, responsible, type, priority } }: CallItemProps) {
 	return (
 		<div className='bg-dark-blue-bg rounded-full pb-4 pt-4 px-12'>
-			<FlexContainer>
-				<div className='bg-[#6A7B96] rounded-full py-3 px-6 w-[164px] h-[96px]'>data</div>
-				<InputEvent />
-				<DropDown<Calls['type']> options={['входящий', 'исходящий']} initial='входящий' text='Выберите тип звонка' />{' '}
-				<DropDown<Calls['priority']> options={['обычный', 'срочный']} initial='обычный' text='Выберите важность' />
-				{/* <AddEvent onClick={handleAddToList} /> */}
-				{/* <ButtonEvent style='deleteBtn'>
+			<GridContainer>
+				<div className='bg-[#6A7B96] rounded-full py-3 px-6 w-[164px] h-[96px] first:justify-self-start'>{date}</div>
+				<InputEvent responsible={responsible} />
+				<DropDown<Calls['type']> options={['входящий', 'исходящий']} initial={type || 'исходящий'} text='Выберите тип звонка' />{' '}
+				<DropDown<Calls['priority']> options={['обычный', 'срочный']} initial={priority || 'обычный'} text='Выберите важность' />
+			</GridContainer>
+		</div>
+	);
+}
+
+export default CallItem;
+
+{
+	/* <ButtonEvent style='deleteBtn'>
 				<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<path
 						fill-rule='evenodd'
@@ -41,10 +36,5 @@ function CallItem() {
 						fill='white'
 					/>
 				</svg>
-			</ButtonEvent> */}
-			</FlexContainer>
-		</div>
-	);
+			</ButtonEvent> */
 }
-
-export default CallItem;

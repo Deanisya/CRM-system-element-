@@ -9,11 +9,11 @@ type DropDownOptionsListProps<T extends string> = {
 
 function DropDownOptionsList<T extends string>({ text, options, onSelect, getColor }: DropDownOptionsListProps<T>) {
 	return (
-		<div className='absolute bg-blue-dark w-fit py-2 rounded-[12px] top-11'>
+		<div className='absolute bg-blue-dark w-fit py-2 rounded-[12px] top-11 z-10'>
 			<p className='whitespace-nowrap text-white-80 px-5'>{text}</p>
 			<ul className='flex flex-col'>
-				{options.map(option => (
-					<li className='hover:bg-green-hover py-2 px-5'>
+				{options.map((option, index) => (
+					<li key={index} className='hover:bg-green-hover py-2 px-5'>
 						<DropDownButton select={option} onClick={() => onSelect(option)} color={getColor(option)} />
 					</li>
 				))}

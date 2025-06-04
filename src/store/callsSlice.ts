@@ -1,9 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Calls, CallsList } from '../types/types';
 import data from '../calls.json';
+import { v4 as uuidv4 } from 'uuid';
 
+const dataWithId = data.map(item => ({
+	...item,
+	id: uuidv4(),
+}));
 const initialState: CallsList = {
-	list: data as Calls[],
+	list: dataWithId as Calls[],
 };
 
 const callsSlice = createSlice({
@@ -11,7 +16,7 @@ const callsSlice = createSlice({
 	initialState,
 	reducers: {
 		addEventsInData(state, action) {
-			state.list = [...state.list, action.payload];
+			state.list.unshift(action.payload);
 		},
 	},
 });

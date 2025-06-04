@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-
-function InputName() {
-	const [value, setValue] = useState<string>('Фамилия Имя участника');
+interface InputNameProps {
+	responsible: string;
+}
+function InputName({ responsible }: InputNameProps) {
+	const [value, setValue] = useState<string>(responsible || 'Фамилия Имя участника');
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 	console.log(value);
@@ -24,12 +26,12 @@ function InputName() {
 	// const isEditName = () => {};
 
 	return (
-		<div>
+		<div className='w-full'>
 			{isEdit ? (
 				<input
 					ref={inputRef}
 					onBlur={() => setIsEdit(false)}
-					className='border border-solid border-[rgba(255,255,255,0.4)] rounded-full px-4 w-fit  pt-1 pb-1.5 bg-[rgba(255,255,255,0.04)] text-sm placeholder:w-fit'
+					className='border border-solid border-[rgba(255,255,255,0.4)] rounded-full px-4 pt-1 pb-1.5 bg-[rgba(255,255,255,0.04)] text-sm w-full'
 					type='text'
 					value={value}
 					onChange={e => setValue(e.target.value)}
@@ -37,7 +39,7 @@ function InputName() {
 					placeholder='Фамилия Имя участника'
 				/>
 			) : (
-				<p onClick={() => setIsEdit(true)} className='border border-solid border-[rgba(255,255,255,0.4)] w-fit rounded-full px-4 pt-1 pb-1.5 bg-[rgba(255,255,255,0.04)] text-sm whitespace-nowrap'>
+				<p onClick={() => setIsEdit(true)} className='border border-solid border-[rgba(255,255,255,0.4)] rounded-full px-4 pt-1 pb-1.5 bg-[rgba(255,255,255,0.04)] text-sm whitespace-nowrap'>
 					{value}
 				</p>
 			)}

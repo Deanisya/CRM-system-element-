@@ -1,11 +1,28 @@
 import CallItem from './components/CallItem';
 import ButtonEvent from './components/ui/ButtonEvent';
+import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { addEventsInData } from './store/callsSlice';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
+	const data = useAppSelector(state => state.callsReducer.list);
+	const dispatch = useAppDispatch();
+	console.log(data);
+	const handleAddEvent = () => {
+		const newEvents = {
+			id: uuidv4(),
+			date: '00000000',
+			time: '12:00',
+			responsible: 'Фамилия Имя участника',
+			type: 'исходящий',
+			priority: 'обычный',
+		};
+		dispatch(addEventsInData(newEvents));
+	};
 	return (
 		<>
 			<div className='flex flex-col gap-5 bg-[#1F232F] py-6 px-6 rounded-[40px]'>
-				<ButtonEvent text={'Добавить событие'} style={'addBtn'}>
+				<ButtonEvent text={'Добавить событие'} style={'addBtn'} onClick={handleAddEvent}>
 					<svg width='33' height='32' viewBox='0 0 33 32' fill='none' xmlns='http://www.w3.org/2000/svg'>
 						<path
 							fillRule='evenodd'
@@ -15,8 +32,9 @@ function App() {
 						/>
 					</svg>
 				</ButtonEvent>
-				<CallItem />
-				<CallItem />
+				{data.map(call => (
+					<CallItem key={call.id} call={call} />
+				))}
 			</div>
 		</>
 	);
