@@ -6,9 +6,14 @@ type DropDownProps<T extends string> = {
 	options: T[];
 	initial: T;
 	text: string;
+	onUpdate: (option: T) => void;
 };
-function DropDown<T extends string>({ options, initial, text }: DropDownProps<T>) {
+function DropDown<T extends string>({ options, initial, text, onUpdate }: DropDownProps<T>) {
 	const { ref, isOpen, select, toggle, handleSelect, getColor } = useDropdown<T>(initial);
+	const handleSelectAndUpdate = (option: T) => {
+		handleSelect(option);
+		onUpdate(option);
+	};
 
 	return (
 		<div className='relative w-fit justify-self-end' ref={ref}>
@@ -22,7 +27,7 @@ function DropDown<T extends string>({ options, initial, text }: DropDownProps<T>
 					/>
 				</svg>
 			</DropDownButton>
-			{isOpen && <DropDownOptionsList options={options} text={text} onSelect={handleSelect} getColor={getColor} />}
+			{isOpen && <DropDownOptionsList options={options} text={text} onSelect={handleSelectAndUpdate} getColor={getColor} />}
 		</div>
 	);
 }

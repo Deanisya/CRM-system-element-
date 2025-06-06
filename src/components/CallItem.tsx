@@ -3,22 +3,34 @@
 // import { addEventsInData } from '../store/callsSlice';
 // import ButtonEvent from './ui/ButtonEvent';
 
-import InputEvent from './InputName';
 import { Calls } from '../types/types';
 import GridContainer from './ui/GridContainer';
 import DropDown from './features/Dropdown/DropDown';
+import { useAppDispatch } from '../hooks/redux';
+import { updateCallInfo } from '../store/callsSlice';
+import InputName from './InputName';
 
 interface CallItemProps {
 	call: Calls;
 }
-function CallItem({ call: { date, responsible, type, priority } }: CallItemProps) {
+function CallItem({ call: { id, date, responsible, type, priority } }: CallItemProps) {
+	const dispatch = useAppDispatch();
+	const handleUpdateName = (responsible: string) => {
+		dispatch(updateCallInfo({ id, responsible }));
+	};
+	const handleUpdateType = (type: Calls['type']) => {
+		dispatch(updateCallInfo({ id, type }));
+	};
+	const handleUpdatePriority = (priority: Calls['priority']) => {
+		dispatch(updateCallInfo({ id, priority }));
+	};
 	return (
 		<div className='bg-dark-blue-bg rounded-full pb-4 pt-4 px-12'>
 			<GridContainer>
 				<div className='bg-[#6A7B96] rounded-full py-3 px-6 w-[164px] h-[96px] first:justify-self-start'>{date}</div>
-				<InputEvent responsible={responsible} />
-				<DropDown<Calls['type']> options={['входящий', 'исходящий']} initial={type || 'исходящий'} text='Выберите тип звонка' />{' '}
-				<DropDown<Calls['priority']> options={['обычный', 'срочный']} initial={priority || 'обычный'} text='Выберите важность' />
+				<InputName responsible={responsible} onUpdate={value => handleUpdateName(value)} />
+				<DropDown<Calls['type']> options={['входящий', 'исходящий']} initial={type || 'исходящий'} text='Выберите тип звонка' onUpdate={option => handleUpdateType(option)} />{' '}
+				<DropDown<Calls['priority']> options={['обычный', 'срочный']} initial={priority || 'обычный'} text='Выберите важность' onUpdate={priority => handleUpdatePriority(priority)} />
 			</GridContainer>
 		</div>
 	);

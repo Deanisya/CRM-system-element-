@@ -1,19 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 interface InputNameProps {
 	responsible: string;
+	onUpdate: (value: string) => void;
 }
-function InputName({ responsible }: InputNameProps) {
-	const [value, setValue] = useState<string>(responsible || 'Фамилия Имя участника');
+function InputName({ responsible, onUpdate }: InputNameProps) {
+	const [value, setValue] = useState<string>(responsible);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
+	const [isError, setIsError] = useState<boolean>(false);
 	const inputRef = useRef<HTMLInputElement>(null);
-	console.log(value);
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (/\d/.test(e.key)) {
 			e.preventDefault();
 		}
 		if (e.key === 'Enter') {
-			setIsEdit(false);
+			validateAndClose();
 		}
 	};
 
@@ -23,15 +24,32 @@ function InputName({ responsible }: InputNameProps) {
 		}
 	}, [isEdit]);
 
-	// const isEditName = () => {};
+	const handleChangeOnInput = () => {
+		setIsEdit(true);
+		setIsError(false);
+	};
+
+	const validateAndClose = () => {
+		if (value.trim().length < 1) {
+			setIsError(true);
+			return;
+		}
+		setIsEdit(false);
+		setIsError(false);
+		onUpdate(value);
+	};
+
+	const handleBlur = () => {
+		validateAndClose();
+	};
 
 	return (
 		<div className='w-full'>
 			{isEdit ? (
 				<input
 					ref={inputRef}
-					onBlur={() => setIsEdit(false)}
-					className='border border-solid border-[rgba(255,255,255,0.4)] rounded-full px-4 pt-1 pb-1.5 bg-[rgba(255,255,255,0.04)] text-sm w-full'
+					onBlur={handleBlur}
+					className={`border border-solid rounded-full px-4 pt-1 pb-1.5 bg-[rgba(255,255,255,0.04)] text-sm w-full ${isError ? 'border-red-500' : 'border-[rgba(255,255,255,0.4)]'}`}
 					type='text'
 					value={value}
 					onChange={e => setValue(e.target.value)}
@@ -39,7 +57,7 @@ function InputName({ responsible }: InputNameProps) {
 					placeholder='Фамилия Имя участника'
 				/>
 			) : (
-				<p onClick={() => setIsEdit(true)} className='border border-solid border-[rgba(255,255,255,0.4)] rounded-full px-4 pt-1 pb-1.5 bg-[rgba(255,255,255,0.04)] text-sm whitespace-nowrap'>
+				<p onClick={handleChangeOnInput} className='border border-solid border-[rgba(255,255,255,0.4)] rounded-full px-4 pt-1 pb-1.5 bg-[rgba(255,255,255,0.04)] text-sm whitespace-nowrap'>
 					{value}
 				</p>
 			)}
