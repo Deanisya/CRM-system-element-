@@ -1,4 +1,4 @@
-import CallItem from './components/CallItem';
+import CallItem from './components/features/CallItem';
 import ButtonEvent from './components/ui/ButtonEvent';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { addEventsInData } from './store/callsSlice';
@@ -11,8 +11,8 @@ function App() {
 	const handleAddEvent = () => {
 		const newEvents = {
 			id: uuidv4(),
-			date: '00000000',
-			time: '12:00',
+			date: new Date(),
+			time: '00:00',
 			responsible: 'Фамилия Имя участника',
 			type: 'исходящий',
 			priority: 'обычный',

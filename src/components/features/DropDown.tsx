@@ -1,6 +1,6 @@
-import DropDownButton from '../../ui/dropdown/DropDownButton';
-import DropDownOptionsList from '../../ui/dropdown/DropDownOptionsList';
-import useDropdown from './useDropdown';
+import useDropdown from '../../hooks/useDropdown';
+import DropDownButton from '../ui/dropdown/DropDownButton';
+import DropDownOptionsList from '../ui/dropdown/DropDownOptionsList';
 
 type DropDownProps<T extends string> = {
 	options: T[];
