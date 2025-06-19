@@ -8,11 +8,17 @@ function App() {
 	const data = useAppSelector(state => state.callsReducer.list);
 	const dispatch = useAppDispatch();
 	console.log(data);
+
+	const fullDateTime = new Date();
+	const date = fullDateTime.toISOString().slice(0, 10);
+	const time = fullDateTime.toTimeString().slice(0, 5);
+	console.log(time);
+
 	const handleAddEvent = () => {
 		const newEvents = {
 			id: uuidv4(),
-			date: new Date(),
-			time: '00:00',
+			date,
+			time,
 			responsible: 'Фамилия Имя участника',
 			type: 'исходящий',
 			priority: 'обычный',
