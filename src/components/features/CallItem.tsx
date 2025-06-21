@@ -12,9 +12,16 @@ interface CallItemProps {
 function CallItem({ call }: CallItemProps) {
 	const { id, responsible, type, priority } = call;
 	const { handleUpdateName, handleUpdateType, handleUpdatePriority, deleteEvent } = useCallUpdater(id);
+	const bgColorCallItem = (typeCall: Calls['type']) => {
+		const colorBg = {
+			исходящий: 'bg-dark-blue-bg hover:bg-blue-light-hover',
+			входящий: 'bg-dark-green-bg hover:bg-green-light-hover',
+		};
+		return colorBg[typeCall] || 'bg-dark-blue-bg';
+	};
 
 	return (
-		<div className='bg-dark-blue-bg rounded-full pb-4 pt-4 px-12'>
+		<div className={`rounded-full pb-4 pt-4 px-12 relative ${bgColorCallItem(type)} group`}>
 			<ButtonEvent style='deleteBtn' onClick={deleteEvent}>
 				<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<path
@@ -26,8 +33,7 @@ function CallItem({ call }: CallItemProps) {
 				</svg>
 			</ButtonEvent>{' '}
 			<GridContainer>
-				{/* <div className='bg-[#6A7B96] rounded-full py-3 px-6 w-[164px] h-[96px] first:justify-self-start'> */} <DatePickerCustom call={call} />
-				{/* </div> */}
+				<DatePickerCustom call={call} />
 				<InputName responsible={responsible} onUpdate={value => handleUpdateName(value)} />
 				<DropDown<Calls['type']> options={['входящий', 'исходящий']} initial={type || 'исходящий'} text='Выберите тип звонка' onUpdate={option => handleUpdateType(option)} />{' '}
 				<DropDown<Calls['priority']> options={['обычный', 'срочный']} initial={priority || 'обычный'} text='Выберите важность' onUpdate={priority => handleUpdatePriority(priority)} />

@@ -12,7 +12,7 @@ body {
 	--color-blue-light: #bcd0f0;
 	--color-blue-dark: #2b3041;
 	--color-blue-dark-text: #253246;
-	--color-blue-light-hover: rgb(188, 208, 240, 0.8);
+	--color-blue-light-hover: #38435c;
 	--color-regal-red: rgba(243, 47, 47, 0.4);
 	--color-regal-red-hover: rgba(243, 47, 47, 0.3);
 	--color-white-20: rgba(255, 255, 255, 0.2);
@@ -20,11 +20,12 @@ body {
 	--color-red: #ca2e2e;
 	--color-green-base: #27454c;
 	--color-green-base-hover: #385459;
-	--color-green-hover: rgba(255, 255, 255, 0.08);
+	--color-green-light-hover: #385359;
 	--color-green-bg: #bcf0de;
 	--color-gray-bg: #777a85;
 	--color-red-bg: #7b303a;
 	--color-white-tx: #f8e3e3;
 	--color-white-border: #d2dae6;
 	--color-dark-blue-bg: #27344e;
+	--color-dark-green-bg: #27454b;
 }

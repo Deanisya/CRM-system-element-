@@ -3,22 +3,21 @@ import ButtonEvent from './components/ui/ButtonEvent';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { addEventsInData } from './store/callsSlice';
 import { v4 as uuidv4 } from 'uuid';
+import formatDateTime from './utils/formatDateTime';
+import TitleColumns from './components/ui/TitleColumns';
 
 function App() {
 	const data = useAppSelector(state => state.callsReducer.list);
 	const dispatch = useAppDispatch();
 	console.log(data);
 
-	const fullDateTime = new Date();
-	const date = fullDateTime.toISOString().slice(0, 10);
-	const time = fullDateTime.toTimeString().slice(0, 5);
-	console.log(time);
+	const { date } = formatDateTime(new Date());
 
 	const handleAddEvent = () => {
 		const newEvents = {
 			id: uuidv4(),
 			date,
-			time,
+			time: '00:00',
 			responsible: 'Фамилия Имя участника',
 			type: 'исходящий',
 			priority: 'обычный',
@@ -28,6 +27,7 @@ function App() {
 	return (
 		<>
 			<div className='flex flex-col gap-5 bg-[#1F232F] py-6 px-6 rounded-[40px]'>
+				<TitleColumns />
 				<ButtonEvent text={'Добавить событие'} style={'addBtn'} onClick={handleAddEvent}>
 					<svg width='33' height='32' viewBox='0 0 33 32' fill='none' xmlns='http://www.w3.org/2000/svg'>
 						<path
