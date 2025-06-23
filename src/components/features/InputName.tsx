@@ -14,6 +14,7 @@ function InputName({ responsible, onUpdate }: InputNameProps) {
 					onBlur={handleBlur}
 					className={`border border-solid rounded-full px-4 pt-1 pb-1.5 bg-[rgba(255,255,255,0.04)] text-sm w-full ${isError ? 'border-red-500' : 'border-[rgba(255,255,255,0.4)]'}`}
 					type='text'
+					name='responsible'
 					value={value}
 					onChange={handleChange}
 					onKeyDown={handleKeyDown}

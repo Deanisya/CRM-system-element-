@@ -5,6 +5,10 @@ export default function useDropdown<T extends string>(initial: T) {
 	const [select, setSelect] = useState<T>(initial);
 	const ref = useRef<HTMLDivElement>(null);
 
+	useEffect(() => {
+		setSelect(initial); // обновляем select, если initial изменился
+	}, [initial]);
+
 	const getColor = (option: T) => {
 		switch (option) {
 			case 'исходящий':
