@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Calls, CallsList } from '../types/types';
 import data from '../calls.json';
 import { v4 as uuidv4 } from 'uuid';
+import recalculatePriority from '../utils/recalculatePriority';
+import isLunch from '../utils/isLunch';
 
 const dataWithId = data.map(item => ({
 	...item,
@@ -17,47 +19,41 @@ const callsSlice = createSlice({
 	reducers: {
 		addEventsInData(state, action) {
 			let newCall = action.payload;
+
 			const callForOneResponsible = state.list.filter(call => call.responsible === newCall.responsible && call.date === newCall.date);
 
-			if (callForOneResponsible.length >= 3) {
-				newCall = {
-					...newCall,
-					priority: 'срочный',
-				};
-			} else {
-				newCall = {
-					...newCall,
-					priority: newCall.priority ?? 'обычный',
-				};
-			}
+			newCall = {
+				...newCall,
+				priority: (callForOneResponsible.length >= 3 ? 'срочный' : 'обычный') as 'срочный' | 'обычный',
+			};
 
-			state.list.unshift(newCall);
+			const updateList = [newCall, ...state.list];
+			state.list = recalculatePriority(updateList, newCall.responsible, newCall.date);
 		},
 		deleteEventsInData(state, action) {
 			const { id } = action.payload;
-			state.list = state.list.filter(call => call.id !== id);
+			const deleteCall = state.list.find(call => call.id === id);
+			if (!deleteCall) return;
+
+			const newList = state.list.filter(call => call.id !== id);
+			state.list = recalculatePriority(newList, deleteCall.responsible, deleteCall.date);
 		},
+
 		updateCallInfo(state, action) {
-			const { id, responsible, type, priority, date, time } = action.payload;
+			const { id, responsible, type, date, time } = action.payload;
 			const item = state.list.find(call => call.id === id);
 			if (!item) return;
+			if (time && isLunch(time)) {
+				alert('Обеденное время');
+				return;
+			}
 
 			if (responsible !== undefined) item.responsible = responsible;
 			if (type !== undefined) item.type = type;
 			if (date !== undefined) item.date = date;
 			if (time !== undefined) item.time = time;
 
-			const callsForResponsibleAndDate = state.list.filter(call => call.responsible === item.responsible && call.date === item.date);
-
-			if (callsForResponsibleAndDate.length >= 4) {
-				callsForResponsibleAndDate.forEach(call => {
-					call.priority = 'срочный';
-				});
-			} else {
-				callsForResponsibleAndDate.forEach(call => {
-					call.priority = 'обычный';
-				});
-			}
+			state.list = recalculatePriority(state.list, item.responsible, item.date);
 		},
 	},
 });
