@@ -5,6 +5,7 @@ export interface Calls {
 	responsible: string;
 	type: 'входящий' | 'исходящий';
 	priority: 'обычный' | 'срочный';
+	isManualPriority?: boolean;
 }
 
 export interface CallsList {
