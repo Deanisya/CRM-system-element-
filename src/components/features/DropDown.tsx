@@ -4,20 +4,19 @@ import DropDownOptionsList from '../ui/dropdown/DropDownOptionsList';
 
 type DropDownProps<T extends string> = {
 	options: T[];
-	initial: T;
+	value: T;
 	text: string;
 	onUpdate: (option: T) => void;
 };
-function DropDown<T extends string>({ options, initial, text, onUpdate }: DropDownProps<T>) {
-	const { ref, isOpen, select, toggle, handleSelect, getColor } = useDropdown<T>(initial);
+function DropDown<T extends string>({ options, value, text, onUpdate }: DropDownProps<T>) {
+	const { ref, isOpen, toggle, getColor } = useDropdown<T>();
 	const handleSelectAndUpdate = (option: T) => {
-		handleSelect(option);
 		onUpdate(option);
 	};
 
 	return (
 		<div className='relative w-fit justify-self-end' ref={ref}>
-			<DropDownButton select={select} onClick={toggle} color={getColor(select)}>
+			<DropDownButton select={value} onClick={toggle} color={getColor(value)}>
 				<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<path
 						fillRule='evenodd'

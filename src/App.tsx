@@ -19,8 +19,8 @@ function App() {
 			date,
 			time: '00:00',
 			responsible: 'Фамилия Имя участника',
-			type: 'исходящий',
-			priority: 'обычный',
+			type: 'исходящий' as 'входящий' | 'исходящий',
+			priority: 'обычный' as 'обычный' | 'срочный',
 		};
 		dispatch(addEventsInData(newEvents));
 	};

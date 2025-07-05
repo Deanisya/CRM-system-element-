@@ -35,8 +35,8 @@ function CallItem({ call }: CallItemProps) {
 			<GridContainer>
 				<DatePickerCustom call={call} />
 				<InputName responsible={responsible} onUpdate={value => handleUpdateName(value)} />
-				<DropDown<Calls['type']> options={['входящий', 'исходящий']} initial={type || 'исходящий'} text='Выберите тип звонка' onUpdate={option => handleUpdateType(option)} />{' '}
-				<DropDown<Calls['priority']> options={['обычный', 'срочный']} initial={priority || 'обычный'} text='Выберите важность' onUpdate={priority => handleUpdatePriority(priority)} />
+				<DropDown<Calls['type']> options={['входящий', 'исходящий']} value={type || 'исходящий'} text='Выберите тип звонка' onUpdate={option => handleUpdateType(option)} />{' '}
+				<DropDown<Calls['priority']> options={['обычный', 'срочный']} value={priority || 'обычный'} text='Выберите важность' onUpdate={priority => handleUpdatePriority(priority)} />
 			</GridContainer>
 		</div>
 	);

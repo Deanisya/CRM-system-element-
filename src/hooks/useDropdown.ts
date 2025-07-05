@@ -1,13 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
-export default function useDropdown<T extends string>(initial: T) {
+export default function useDropdown<T extends string>() {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [select, setSelect] = useState<T>(initial);
 	const ref = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		setSelect(initial); // обновляем select, если initial изменился
-	}, [initial]);
 
 	const getColor = (option: T) => {
 		switch (option) {
@@ -27,11 +22,6 @@ export default function useDropdown<T extends string>(initial: T) {
 	const toggle = () => setIsOpen(prev => !prev);
 	const close = () => setIsOpen(false);
 
-	const handleSelect = (option: T) => {
-		setSelect(option);
-		close();
-	};
-
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (ref.current && !ref.current.contains(event.target as Node)) {
@@ -46,10 +36,8 @@ export default function useDropdown<T extends string>(initial: T) {
 	return {
 		ref,
 		isOpen,
-		select,
 		toggle,
-		// close, ------- если понадобиться закрывать dropdown где то в другом месте
-		handleSelect,
+		close, // ------- если понадобиться закрывать dropdown где то в другом месте
 		getColor,
 	};
 }

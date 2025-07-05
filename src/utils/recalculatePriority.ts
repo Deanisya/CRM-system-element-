@@ -1,9 +1,9 @@
 import { Calls } from '../types/types';
-
 export default function recalculatePriority(list: Calls[], responsible: string, date: string) {
 	const filteredCalls = list.filter(call => call.responsible === responsible && call.date === date);
 
 	const hasManualUrgent = filteredCalls.some(call => call.isManualPriority && call.priority === 'срочный');
+	console.log('hasManualUrgent', hasManualUrgent);
 
 	let updatedCalls = [...list];
 
